@@ -1,0 +1,24 @@
+apiVersion:  apps/v1
+kind: Deployment
+metadata: 
+    name: deploy
+    labels: 
+      app: myapp
+spec:
+   selector:
+      matchLabels:
+         app: myapp
+   template:
+        metadata:
+          name: POD
+          labels:
+            app: myapp
+        spec:
+          containers:
+            - name: myapp
+              image: artashesavetisyan/istio-basics-course:service-b
+              imagePullPolicy: Always
+              ports:
+              - containerPort: 8082
+              securityContext:
+                 runAsUser: 1000
